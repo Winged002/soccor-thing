@@ -1,0 +1,1035 @@
+.data_start
+
+    .export BlueGoal
+    .export RedGoal
+    .export Ball
+    .export BlueScore1
+    .export BlueScore2
+    .export BlueScore3
+    .export BlueScore4
+    .export RedScore1
+    .export RedScore2
+    .export RedScore3
+    .export RedScore4
+    .export RedTeamScore
+    .export BlueTeamScore
+    .export particlesRed
+    .export particlesBlue
+    .export BlueTeamScoreint
+    .export RedTeamScoreint
+    .export BallSpawn
+    .sync Cup, none
+
+    __refl_const_intnl_udonTypeID: %SystemInt64, null
+    __refl_const_intnl_udonTypeName: %SystemString, null
+    BallSpawn: %UnityEngineGameObject, null
+    RedScore4: %UnityEngineGameObject, null
+    RedScore3: %UnityEngineGameObject, null
+    RedScore2: %UnityEngineGameObject, null
+    RedScore1: %UnityEngineGameObject, null
+    BlueScore4: %UnityEngineGameObject, null
+    BlueScore3: %UnityEngineGameObject, null
+    BlueScore2: %UnityEngineGameObject, null
+    BlueScore1: %UnityEngineGameObject, null
+    Ball: %UnityEngineGameObject, null
+    RedGoal: %UnityEngineGameObject, null
+    BlueGoal: %UnityEngineGameObject, null
+    particlesBlue: %UnityEngineGameObjectArray, null
+    particlesRed: %UnityEngineGameObjectArray, null
+    RedTeamScoreint: %SystemInt32, null
+    BlueTeamScoreint: %SystemInt32, null
+    BlueTeamScore: %UnityEngineUIText, null
+    RedTeamScore: %UnityEngineUIText, null
+    onTriggerExitOther: %UnityEngineCollider, null
+    Cup: %SystemInt32, null
+    Ball_Spawn: %UnityEngineVector3, null
+    __0_mp_other_Collider: %UnityEngineCollider, null
+    __1_obj_GameObject: %UnityEngineGameObject, null
+    __0_obj_GameObject: %UnityEngineGameObject, null
+    __1_const_intnl_SystemBoolean: %SystemBoolean, null
+    __0_const_intnl_SystemBoolean: %SystemBoolean, null
+    __1_const_intnl_SystemInt32: %SystemInt32, null
+    __0_const_intnl_SystemInt32: %SystemInt32, null
+    __0_const_intnl_SystemType: %SystemType, null
+    __0_const_intnl_SystemUInt32: %SystemUInt32, null
+    __11_intnl_SystemBoolean: %SystemBoolean, null
+    __10_intnl_SystemBoolean: %SystemBoolean, null
+    __9_intnl_SystemBoolean: %SystemBoolean, null
+    __8_intnl_SystemBoolean: %SystemBoolean, null
+    __7_intnl_SystemBoolean: %SystemBoolean, null
+    __6_intnl_SystemBoolean: %SystemBoolean, null
+    __5_intnl_SystemBoolean: %SystemBoolean, null
+    __4_intnl_SystemBoolean: %SystemBoolean, null
+    __3_intnl_SystemBoolean: %SystemBoolean, null
+    __2_intnl_SystemBoolean: %SystemBoolean, null
+    __1_intnl_SystemBoolean: %SystemBoolean, null
+    __0_intnl_SystemBoolean: %SystemBoolean, null
+    __3_intnl_SystemInt32: %SystemInt32, null
+    __2_intnl_SystemInt32: %SystemInt32, null
+    __1_intnl_SystemInt32: %SystemInt32, null
+    __0_intnl_SystemInt32: %SystemInt32, null
+    __1_intnl_UnityEngineRigidbody: %UnityEngineRigidbody, null
+    __0_intnl_UnityEngineRigidbody: %UnityEngineRigidbody, null
+    __1_intnl_SystemString: %SystemString, null
+    __0_intnl_SystemString: %SystemString, null
+    __10_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __9_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __8_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __7_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __6_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __5_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __4_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __3_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __2_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __1_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __0_intnl_UnityEngineTransform: %UnityEngineTransform, null
+    __0_intnl_returnTarget_UInt32: %SystemUInt32, null
+    __1_intnl_UnityEngineVector3: %UnityEngineVector3, null
+    __0_intnl_UnityEngineVector3: %UnityEngineVector3, null
+    __1_intnl_VRCSDKBaseVRCPlayerApi: %VRCSDKBaseVRCPlayerApi, null
+    __0_intnl_VRCSDKBaseVRCPlayerApi: %VRCSDKBaseVRCPlayerApi, null
+
+.data_end
+
+        
+         #  using UdonSharp;
+        
+         #  using UnityEngine;
+        
+         #  using UnityEngine.UI;
+        
+         #  using VRC.SDKBase;
+        
+         #  using VRC.Udon;
+        
+         #  using System.Collections;
+        
+         #  public class Soccor : UdonSharpBehaviour
+.code_start
+        
+         #  public GameObject BlueGoal;
+        
+         #  public GameObject RedGoal;
+        
+         #  public GameObject Ball;
+        
+         #  	public GameObject BlueScore1;
+        
+         #  	public GameObject BlueScore2;
+        
+         #  	public GameObject BlueScore3;
+        
+         #  	public GameObject BlueScore4;
+        
+         #  	public GameObject RedScore1;
+        
+         #  	public GameObject RedScore2;
+        
+         #  	public GameObject RedScore3;
+        
+         #  	public GameObject RedScore4;
+        
+         #  public Text RedTeamScore;
+        
+         #  public Text BlueTeamScore;
+        
+         #  public GameObject[] particlesRed;
+        
+         #  public GameObject[] particlesBlue;
+        
+         #  [UdonSynced]private int Cup;
+        
+         #  public int BlueTeamScoreint = 0;
+        
+         #  public int RedTeamScoreint = 0;
+        
+         #  	public GameObject BallSpawn;
+        
+         #  private Vector3 Ball_Spawn;
+        
+         #  	private void Start()
+    .export _start
+        
+    _start:
+        
+        PUSH, __0_const_intnl_SystemUInt32
+        
+         #  {
+        
+         #  Ball_Spawn = BallSpawn.transform.position;
+        PUSH, BallSpawn
+        PUSH, __0_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __0_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__get_position__UnityEngineVector3"
+        
+         #  		BlueScore1.SetActive(false);
+        PUSH, BlueScore1
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  		BlueScore2.SetActive(false);
+        PUSH, BlueScore2
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  		BlueScore3.SetActive(false);
+        PUSH, BlueScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  		BlueScore4.SetActive(false);
+        PUSH, BlueScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  		RedScore1.SetActive(false);
+        PUSH, RedScore1
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  		RedScore2.SetActive(false);
+        PUSH, RedScore2
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  		RedScore3.SetActive(false);
+        PUSH, RedScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  		RedScore4.SetActive(false);
+        PUSH, RedScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        PUSH, __0_intnl_returnTarget_UInt32 # Function epilogue
+        COPY
+        JUMP_INDIRECT, __0_intnl_returnTarget_UInt32
+        
+        
+         #  public void OnTriggerExit(Collider other)
+    .export _onTriggerExit
+        
+    _onTriggerExit:
+        
+        PUSH, __0_const_intnl_SystemUInt32
+        PUSH, onTriggerExitOther
+        PUSH, __0_mp_other_Collider
+        COPY
+        
+         #  {
+        
+         #  if (other.transform.parent == BlueGoal.transform)
+        PUSH, __0_mp_other_Collider
+        PUSH, __1_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineCollider.__get_transform__UnityEngineTransform"
+        PUSH, __1_intnl_UnityEngineTransform
+        PUSH, __2_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineTransform.__get_parent__UnityEngineTransform"
+        PUSH, BlueGoal
+        PUSH, __3_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __2_intnl_UnityEngineTransform
+        PUSH, __3_intnl_UnityEngineTransform
+        PUSH, __0_intnl_SystemBoolean
+        EXTERN, "UnityEngineObject.__op_Equality__UnityEngineObject_UnityEngineObject__SystemBoolean"
+        PUSH, __0_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00000800
+        
+         #  {
+        
+         #  			if (RedScore1.activeSelf == false)
+        PUSH, RedScore1
+        PUSH, __1_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__get_activeSelf__SystemBoolean"
+        PUSH, __1_intnl_SystemBoolean
+        PUSH, __0_const_intnl_SystemBoolean
+        PUSH, __2_intnl_SystemBoolean
+        EXTERN, "SystemBoolean.__op_Equality__SystemBoolean_SystemBoolean__SystemBoolean"
+        PUSH, __2_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00000308
+        
+         #  			{
+        
+         #  				RedScore1.SetActive(true);
+        PUSH, RedScore1
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				RedScore2.SetActive(false);
+        PUSH, RedScore2
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				RedScore3.SetActive(false);
+        PUSH, RedScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				RedScore4.SetActive(false);
+        PUSH, RedScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  				Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __4_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __4_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __0_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __0_intnl_UnityEngineRigidbody
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  				Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __5_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __5_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        JUMP, 0x00000800
+        
+         #  			else
+        
+         #  			{ if(RedScore2.activeSelf == false)
+        PUSH, RedScore2
+        PUSH, __3_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__get_activeSelf__SystemBoolean"
+        PUSH, __3_intnl_SystemBoolean
+        PUSH, __0_const_intnl_SystemBoolean
+        PUSH, __4_intnl_SystemBoolean
+        EXTERN, "SystemBoolean.__op_Equality__SystemBoolean_SystemBoolean__SystemBoolean"
+        PUSH, __4_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00000470
+        
+         #  				{
+        
+         #  				RedScore1.SetActive(true);
+        PUSH, RedScore1
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				RedScore2.SetActive(true);
+        PUSH, RedScore2
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				RedScore3.SetActive(false);
+        PUSH, RedScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				RedScore4.SetActive(false);
+        PUSH, RedScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  				Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __4_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __4_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __0_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __0_intnl_UnityEngineRigidbody
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  				Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __5_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __5_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        JUMP, 0x00000800
+        
+         #  				else
+        
+         #  				{ if(RedScore3.activeSelf == false)
+        PUSH, RedScore3
+        PUSH, __5_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__get_activeSelf__SystemBoolean"
+        PUSH, __5_intnl_SystemBoolean
+        PUSH, __0_const_intnl_SystemBoolean
+        PUSH, __6_intnl_SystemBoolean
+        EXTERN, "SystemBoolean.__op_Equality__SystemBoolean_SystemBoolean__SystemBoolean"
+        PUSH, __6_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x000005D8
+        
+         #  					{
+        
+         #  						RedScore1.SetActive(true);
+        PUSH, RedScore1
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  						RedScore2.SetActive(true);
+        PUSH, RedScore2
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  						RedScore3.SetActive(true);
+        PUSH, RedScore3
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  						RedScore4.SetActive(false);
+        PUSH, RedScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  						Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  						Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __4_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __4_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __0_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __0_intnl_UnityEngineRigidbody
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  						Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __5_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __5_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        JUMP, 0x00000800
+        
+         #  					else
+        
+         #  					{ if(RedScore4.activeSelf == false)
+        PUSH, RedScore4
+        PUSH, __7_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__get_activeSelf__SystemBoolean"
+        PUSH, __7_intnl_SystemBoolean
+        PUSH, __0_const_intnl_SystemBoolean
+        PUSH, __8_intnl_SystemBoolean
+        EXTERN, "SystemBoolean.__op_Equality__SystemBoolean_SystemBoolean__SystemBoolean"
+        PUSH, __8_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00000740
+        
+         #  						{
+        
+         #  							RedScore1.SetActive(true);
+        PUSH, RedScore1
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore2.SetActive(true);
+        PUSH, RedScore2
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore3.SetActive(true);
+        PUSH, RedScore3
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore4.SetActive(true);
+        PUSH, RedScore4
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  							Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __4_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __4_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __0_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __0_intnl_UnityEngineRigidbody
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  							Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __5_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __5_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        JUMP, 0x00000800
+        
+         #  						else
+        
+         #  						{
+        
+         #  							BlueScore1.SetActive(false);
+        PUSH, BlueScore1
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore2.SetActive(false);
+        PUSH, BlueScore2
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore3.SetActive(false);
+        PUSH, BlueScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore4.SetActive(false);
+        PUSH, BlueScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore1.SetActive(false);
+        PUSH, RedScore1
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore2.SetActive(false);
+        PUSH, RedScore2
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore3.SetActive(false);
+        PUSH, RedScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore4.SetActive(false);
+        PUSH, RedScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  if (other.transform.parent == RedGoal.transform)
+        PUSH, __0_mp_other_Collider
+        PUSH, __4_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineCollider.__get_transform__UnityEngineTransform"
+        PUSH, __4_intnl_UnityEngineTransform
+        PUSH, __5_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineTransform.__get_parent__UnityEngineTransform"
+        PUSH, RedGoal
+        PUSH, __6_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __5_intnl_UnityEngineTransform
+        PUSH, __6_intnl_UnityEngineTransform
+        PUSH, __1_intnl_SystemBoolean
+        EXTERN, "UnityEngineObject.__op_Equality__UnityEngineObject_UnityEngineObject__SystemBoolean"
+        PUSH, __1_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00000ED8
+        
+         #  {
+        
+         #  			if (BlueScore1.activeSelf == false)
+        PUSH, BlueScore1
+        PUSH, __2_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__get_activeSelf__SystemBoolean"
+        PUSH, __2_intnl_SystemBoolean
+        PUSH, __0_const_intnl_SystemBoolean
+        PUSH, __3_intnl_SystemBoolean
+        EXTERN, "SystemBoolean.__op_Equality__SystemBoolean_SystemBoolean__SystemBoolean"
+        PUSH, __3_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x000009E0
+        
+         #  			{
+        
+         #  				BlueScore1.SetActive(true);
+        PUSH, BlueScore1
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				BlueScore2.SetActive(false);
+        PUSH, BlueScore2
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				BlueScore3.SetActive(false);
+        PUSH, BlueScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				BlueScore4.SetActive(false);
+        PUSH, BlueScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  				Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __7_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __7_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __0_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __0_intnl_UnityEngineRigidbody
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  				Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __8_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __8_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        JUMP, 0x00000ED8
+        
+         #  			else
+        
+         #  			{ if(BlueScore2.activeSelf == false)
+        PUSH, BlueScore2
+        PUSH, __4_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__get_activeSelf__SystemBoolean"
+        PUSH, __4_intnl_SystemBoolean
+        PUSH, __0_const_intnl_SystemBoolean
+        PUSH, __5_intnl_SystemBoolean
+        EXTERN, "SystemBoolean.__op_Equality__SystemBoolean_SystemBoolean__SystemBoolean"
+        PUSH, __5_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00000B48
+        
+         #  				{
+        
+         #  				BlueScore1.SetActive(true);
+        PUSH, BlueScore1
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				BlueScore2.SetActive(true);
+        PUSH, BlueScore2
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				BlueScore3.SetActive(false);
+        PUSH, BlueScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				BlueScore4.SetActive(false);
+        PUSH, BlueScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  				Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  				Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __7_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __7_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __0_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __0_intnl_UnityEngineRigidbody
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  				Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __8_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __8_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        JUMP, 0x00000ED8
+        
+         #  				else
+        
+         #  				{ if(BlueScore3.activeSelf == false)
+        PUSH, BlueScore3
+        PUSH, __6_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__get_activeSelf__SystemBoolean"
+        PUSH, __6_intnl_SystemBoolean
+        PUSH, __0_const_intnl_SystemBoolean
+        PUSH, __7_intnl_SystemBoolean
+        EXTERN, "SystemBoolean.__op_Equality__SystemBoolean_SystemBoolean__SystemBoolean"
+        PUSH, __7_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00000CB0
+        
+         #  					{
+        
+         #  						BlueScore1.SetActive(true);
+        PUSH, BlueScore1
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  						BlueScore2.SetActive(true);
+        PUSH, BlueScore2
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  						BlueScore3.SetActive(true);
+        PUSH, BlueScore3
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  						BlueScore4.SetActive(false);
+        PUSH, BlueScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  						Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  						Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __7_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __7_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __0_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __0_intnl_UnityEngineRigidbody
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  						Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __8_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __8_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        JUMP, 0x00000ED8
+        
+         #  					else
+        
+         #  					{ if(BlueScore4.activeSelf == false)
+        PUSH, BlueScore4
+        PUSH, __8_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__get_activeSelf__SystemBoolean"
+        PUSH, __8_intnl_SystemBoolean
+        PUSH, __0_const_intnl_SystemBoolean
+        PUSH, __9_intnl_SystemBoolean
+        EXTERN, "SystemBoolean.__op_Equality__SystemBoolean_SystemBoolean__SystemBoolean"
+        PUSH, __9_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00000E18
+        
+         #  						{
+        
+         #  							BlueScore1.SetActive(true);
+        PUSH, BlueScore1
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore2.SetActive(true);
+        PUSH, BlueScore2
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore3.SetActive(true);
+        PUSH, BlueScore3
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore4.SetActive(true);
+        PUSH, BlueScore4
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __0_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  							Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __7_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __7_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __0_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __0_intnl_UnityEngineRigidbody
+        PUSH, __0_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  							Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __8_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __8_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        JUMP, 0x00000ED8
+        
+         #  						else
+        
+         #  						{
+        
+         #  							BlueScore1.SetActive(false);
+        PUSH, BlueScore1
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore2.SetActive(false);
+        PUSH, BlueScore2
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore3.SetActive(false);
+        PUSH, BlueScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							BlueScore4.SetActive(false);
+        PUSH, BlueScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore1.SetActive(false);
+        PUSH, RedScore1
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore2.SetActive(false);
+        PUSH, RedScore2
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore3.SetActive(false);
+        PUSH, RedScore3
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  							RedScore4.SetActive(false);
+        PUSH, RedScore4
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        PUSH, __0_intnl_returnTarget_UInt32 # Function epilogue
+        COPY
+        JUMP_INDIRECT, __0_intnl_returnTarget_UInt32
+        
+        
+         #  	public void Update()
+    .export _update
+        
+    _update:
+        
+        PUSH, __0_const_intnl_SystemUInt32
+        
+         #  	{
+        
+         #  		RedTeamScore.text = RedTeamScoreint.ToString();
+        PUSH, RedTeamScoreint
+        PUSH, __0_intnl_SystemString
+        EXTERN, "SystemInt32.__ToString__SystemString"
+        PUSH, RedTeamScore
+        PUSH, __0_intnl_SystemString
+        EXTERN, "UnityEngineUIText.__set_text__SystemString__SystemVoid"
+        
+         #  		BlueTeamScore.text = BlueTeamScoreint.ToString();
+        PUSH, BlueTeamScoreint
+        PUSH, __1_intnl_SystemString
+        EXTERN, "SystemInt32.__ToString__SystemString"
+        PUSH, BlueTeamScore
+        PUSH, __1_intnl_SystemString
+        EXTERN, "UnityEngineUIText.__set_text__SystemString__SystemVoid"
+        PUSH, __0_intnl_returnTarget_UInt32 # Function epilogue
+        COPY
+        JUMP_INDIRECT, __0_intnl_returnTarget_UInt32
+        
+        
+         #  public void RespawnBall()
+    .export RespawnBall
+        
+    RespawnBall:
+        
+        PUSH, __0_const_intnl_SystemUInt32
+        
+         #  {
+        
+         #  Networking.SetOwner(Networking.LocalPlayer, Ball);
+        PUSH, __1_intnl_VRCSDKBaseVRCPlayerApi
+        EXTERN, "VRCSDKBaseNetworking.__get_LocalPlayer__VRCSDKBaseVRCPlayerApi"
+        PUSH, __1_intnl_VRCSDKBaseVRCPlayerApi
+        PUSH, Ball
+        EXTERN, "VRCSDKBaseNetworking.__SetOwner__VRCSDKBaseVRCPlayerApi_UnityEngineGameObject__SystemVoid"
+        
+         #  Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        PUSH, Ball
+        PUSH, __9_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __9_intnl_UnityEngineTransform
+        PUSH, __0_const_intnl_SystemType
+        PUSH, __1_intnl_UnityEngineRigidbody
+        EXTERN, "UnityEngineRigidbody.__GetComponent__T"
+        PUSH, __1_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineVector3.__get_zero__UnityEngineVector3"
+        PUSH, __1_intnl_UnityEngineRigidbody
+        PUSH, __1_intnl_UnityEngineVector3
+        EXTERN, "UnityEngineRigidbody.__set_velocity__UnityEngineVector3__SystemVoid"
+        
+         #  Ball.transform.position = Ball_Spawn;
+        PUSH, Ball
+        PUSH, __10_intnl_UnityEngineTransform
+        EXTERN, "UnityEngineGameObject.__get_transform__UnityEngineTransform"
+        PUSH, __10_intnl_UnityEngineTransform
+        PUSH, Ball_Spawn
+        EXTERN, "UnityEngineTransform.__set_position__UnityEngineVector3__SystemVoid"
+        PUSH, __0_intnl_returnTarget_UInt32 # Function epilogue
+        COPY
+        JUMP_INDIRECT, __0_intnl_returnTarget_UInt32
+        
+        
+         #  public void fireEffectsBlue()
+    .export fireEffectsBlue
+        
+    fireEffectsBlue:
+        
+        PUSH, __0_const_intnl_SystemUInt32
+        
+         #  {
+        
+         #  foreach (GameObject obj in particlesBlue)
+        PUSH, __0_const_intnl_SystemInt32
+        PUSH, __0_intnl_SystemInt32
+        COPY
+        PUSH, particlesBlue
+        PUSH, __1_intnl_SystemInt32
+        EXTERN, "UnityEngineGameObjectArray.__get_Length__SystemInt32"
+        PUSH, __0_intnl_SystemInt32
+        PUSH, __1_intnl_SystemInt32
+        PUSH, __10_intnl_SystemBoolean
+        EXTERN, "SystemInt32.__op_LessThan__SystemInt32_SystemInt32__SystemBoolean"
+        PUSH, __10_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00001118
+        PUSH, particlesBlue
+        PUSH, __0_intnl_SystemInt32
+        PUSH, __0_obj_GameObject
+        EXTERN, "SystemObjectArray.__Get__SystemInt32__SystemObject"
+        
+         #  {
+        
+         #  obj.SetActive(false);
+        PUSH, __0_obj_GameObject
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  obj.SetActive(true);
+        PUSH, __0_obj_GameObject
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        PUSH, __0_intnl_SystemInt32
+        PUSH, __1_const_intnl_SystemInt32
+        PUSH, __0_intnl_SystemInt32
+        EXTERN, "SystemInt32.__op_Addition__SystemInt32_SystemInt32__SystemInt32"
+        JUMP, 0x00001070
+        PUSH, __0_intnl_returnTarget_UInt32 # Function epilogue
+        COPY
+        JUMP_INDIRECT, __0_intnl_returnTarget_UInt32
+        
+        
+         #  public void fireEffectsRed()
+    .export fireEffectsRed
+        
+    fireEffectsRed:
+        
+        PUSH, __0_const_intnl_SystemUInt32
+        
+         #  {
+        
+         #  foreach (GameObject obj in particlesRed)
+        PUSH, __0_const_intnl_SystemInt32
+        PUSH, __2_intnl_SystemInt32
+        COPY
+        PUSH, particlesRed
+        PUSH, __3_intnl_SystemInt32
+        EXTERN, "UnityEngineGameObjectArray.__get_Length__SystemInt32"
+        PUSH, __2_intnl_SystemInt32
+        PUSH, __3_intnl_SystemInt32
+        PUSH, __11_intnl_SystemBoolean
+        EXTERN, "SystemInt32.__op_LessThan__SystemInt32_SystemInt32__SystemBoolean"
+        PUSH, __11_intnl_SystemBoolean
+        JUMP_IF_FALSE, 0x00001208
+        PUSH, particlesRed
+        PUSH, __2_intnl_SystemInt32
+        PUSH, __1_obj_GameObject
+        EXTERN, "SystemObjectArray.__Get__SystemInt32__SystemObject"
+        
+         #  {
+        
+         #  obj.SetActive(false);
+        PUSH, __1_obj_GameObject
+        PUSH, __0_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        
+         #  obj.SetActive(true);
+        PUSH, __1_obj_GameObject
+        PUSH, __1_const_intnl_SystemBoolean
+        EXTERN, "UnityEngineGameObject.__SetActive__SystemBoolean__SystemVoid"
+        PUSH, __2_intnl_SystemInt32
+        PUSH, __1_const_intnl_SystemInt32
+        PUSH, __2_intnl_SystemInt32
+        EXTERN, "SystemInt32.__op_Addition__SystemInt32_SystemInt32__SystemInt32"
+        JUMP, 0x00001160
+        PUSH, __0_intnl_returnTarget_UInt32 # Function epilogue
+        COPY
+        JUMP_INDIRECT, __0_intnl_returnTarget_UInt32
+        
+.code_end
